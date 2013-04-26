@@ -1,0 +1,1 @@
+Library that provides the ability to adapt objects to other types.

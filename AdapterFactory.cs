@@ -164,8 +164,8 @@ namespace Adapters
             var instanceType = instance.GetType();
 
             var typeName = AdapterProxy != null
-                           ? String.Concat(instanceType.FullName, "Proxy")
-                           : String.Concat(instanceType.FullName, "Adapter");
+                           ? string.Concat(instanceType.FullName, "Proxy")
+                           : string.Concat(instanceType.FullName, "Adapter");
 
             var type = m_DynamicModule.GetType(typeName);
 
@@ -237,9 +237,7 @@ namespace Adapters
                              ? adapterType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic)
                                           .Where(p => p.CanRead
                                                       ? CanOverrideMethod(p.GetGetMethod())
-                                                      : p.CanWrite
-                                                        ? CanOverrideMethod(p.GetSetMethod())
-                                                        : false)
+                                                      : p.CanWrite && CanOverrideMethod(p.GetSetMethod()))
                                           .ToArray()
                              : adapterType.GetProperties();
 
